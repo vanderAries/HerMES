@@ -2,7 +2,7 @@ import json
 import numpy as np
 
 
-class Loader(object):
+class ModelImport(object):
     def __init__(self, path):
         self.path = path
         json_file = open(self.path)

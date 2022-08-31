@@ -182,8 +182,8 @@ Window {
 
                     Image {
                         id: iconApp
-                        width: 22
-                        height: 22
+                        width: 50
+                        // height: 22
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom

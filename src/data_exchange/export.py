@@ -2,7 +2,7 @@ import numpy as np
 import json
 
 
-class GeometryExporter(object):
+class ModelExport(object):
     def __init__(self, data, path):
         self.data = data
         self.path = path
@@ -67,7 +67,7 @@ class GeometryExporter(object):
             file.close()
 
 
-class ResultsExporter(object):
+class ResultsExport(object):
     def __init__(self, data, results, path):
         self.data = data
         self.path = path

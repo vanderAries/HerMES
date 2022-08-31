@@ -4,8 +4,8 @@ import os
 
 from structure.build_model import Truss2D, Truss3D
 from structure.solver import LinearSolver2D, LinearSolver3D, NonlinearForceSolver2D, NonlinearForceSolver3D, NonlinearDisSolver2D, NonlinearDisSolver3D
-from data_exchange.export import GeometryExporter, ResultsExporter
-from data_exchange.json_loader import Loader
+from data_exchange.export import ModelExport, ResultsExport
+from data_exchange.model_import import ModelImport
 
 from PySide2.QtWidgets import QApplication
 from PySide2.QtQml import QQmlApplicationEngine
@@ -31,7 +31,7 @@ class Backend(QObject):
     def importFile(self, filePath):
         self.path = filePath[8:]
         self.name = QFileInfo(self.path).baseName()
-        self.data = Loader(self.path)
+        self.data = ModelImport(self.path)
         self.readPath.emit(self.path)
         self.isDataLoaded.emit("Data imported")
 
@@ -46,7 +46,7 @@ class Backend(QObject):
     def importFileFromPath(self, filePath):
         self.path = filePath
         self.name = QFileInfo(self.path).baseName()
-        self.data = Loader(self.path)
+        self.data = ModelImport(self.path)
         self.isDataLoaded.emit("Data imported")
 
         if self.data.structure_type == "2D":
@@ -57,10 +57,10 @@ class Backend(QObject):
     # Import Examples
     @Slot(None)
     def importVonMises(self):
-        rel_path = "examples/von_mises_truss_data.json"
+        rel_path = "src/examples/von_mises_truss_data.json"
         self.path = os.path.abspath(rel_path)
         self.name = QFileInfo(self.path).baseName()
-        self.data = Loader(self.path)
+        self.data = ModelImport(self.path)
         self.readPath.emit(self.path)
         self.isDataLoaded.emit("Data imported")
 
@@ -68,10 +68,10 @@ class Backend(QObject):
 
     @Slot(None)
     def importSpaceTruss(self):
-        rel_path = "examples/space_truss_data.json"
+        rel_path = "src/examples/space_truss_data.json"
         self.path = os.path.abspath(rel_path)
         self.name = QFileInfo(self.path).baseName()
-        self.data = Loader(self.path)
+        self.data = ModelImport(self.path)
         self.readPath.emit(self.path)
         self.isDataLoaded.emit("Data imported")
 
@@ -79,10 +79,10 @@ class Backend(QObject):
 
     @Slot(None)
     def importDome(self):
-        rel_path = "examples/dome_data.json"
+        rel_path = "src/examples/dome_data.json"
         self.path = os.path.abspath(rel_path)
         self.name = QFileInfo(self.path).baseName()
-        self.data = Loader(self.path)
+        self.data = ModelImport(self.path)
         self.readPath.emit(self.path)
         self.isDataLoaded.emit("Data imported")
 
@@ -93,20 +93,20 @@ class Backend(QObject):
     @Slot(str)
     def exportTo2D(self, filePath):
         self.path = filePath[8:]
-        self.geomExport = GeometryExporter(self.data, self.path)
+        self.geomExport = ModelExport(self.data, self.path)
         self.geomExport.to2D()
 
     # 2D -> 3D
     @Slot(str)
     def exportTo3D(self, filePath):
         self.path = filePath[8:]
-        self.geomExport = GeometryExporter(self.data, self.path)
+        self.geomExport = ModelExport(self.data, self.path)
         self.geomExport.to3D()
 
     @Slot(str)
     def resultsExport(self, filePath):
         self.path = filePath[8:]
-        self.resExport = ResultsExporter(self.data, self.solve, self.path)
+        self.resExport = ResultsExport(self.data, self.solve, self.path)
 
     @Slot(None)
     def buildModel(self):
