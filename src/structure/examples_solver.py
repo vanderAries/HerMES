@@ -53,7 +53,7 @@ def extractElext(edof, a):
     return ed
 
 
-class LinearVonMises(object):
+class LinearVonMises:
     def __init__(self, edof, max_edof, ex, ey, ep, e_num, supports, forces, H):
         self.q = np.asmatrix(np.zeros((max_edof, 1)))
         self.Ne = np.zeros((e_num, 1))
@@ -84,7 +84,7 @@ class LinearVonMises(object):
         self.nodal_Ne = np.repeat(self.Ne, 2).reshape(e_num, 2)
 
 
-class NonlinearForceVonMises(object):
+class NonlinearForceVonMises:
     def __init__(self, edof, max_edof, ex, ey, ep, e_num, supports, forces, H):
         self.Q = np.zeros((max_edof, 1))
         self.deltaQ = [0.1, 0.1, 0.1, 0.08]
@@ -199,7 +199,7 @@ class NonlinearForceVonMises(object):
         self.nodal_Ne = np.repeat(self.Ne, 2).reshape(e_num, 2)
 
 
-class NonlinearDisVonMises(object):
+class NonlinearDisVonMises:
     def __init__(self, edof, max_edof, ex, ey, ep, e_num, supports, forces, H):
 
         self.Q = np.zeros((max_edof, 1))
@@ -307,7 +307,7 @@ class NonlinearDisVonMises(object):
         self.nodal_Ne = np.repeat(self.Ne, 2).reshape(e_num, 2)
 
 
-class LinearDome(object):
+class LinearDome:
     def __init__(self, edof, max_edof, ex, ey, ez, ep, e_num, supports, forces):
         self.q = np.asmatrix(np.zeros((max_edof, 1)))
         self.Ne = np.zeros((e_num, 1))
@@ -336,7 +336,7 @@ class LinearDome(object):
         self.nodal_Ne = np.repeat(self.Ne, 2).reshape(e_num, 2)
 
 
-class NonlinearForceDome(object):
+class NonlinearForceDome:
     def __init__(self, edof, max_edof, ex, ey, ez, ep, e_num, supports, forces):
         self.Q = np.zeros((max_edof, 1))
         self.deltaQ = [0.1, 0.1, 0.1, 0.08]
@@ -437,7 +437,7 @@ class NonlinearForceDome(object):
         self.nodal_Ne = np.repeat(self.Ne, 2).reshape(e_num, 2)
 
 
-class NonlinearDisDome(object):
+class NonlinearDisDome:
     def __init__(self, edof, max_edof, ex, ey, ez, ep, e_num, supports, forces):
 
         self.Q = np.zeros((max_edof, 1))

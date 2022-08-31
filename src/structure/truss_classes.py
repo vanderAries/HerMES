@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class Element_parameters2D(object):
+class Element_parameters2D:
     """Parent class that contains all element parameters needed to compute stiffness and forces"""
 
     def __init__(self, edof, e_num, ex_global, ey_global, ep, qe=None, Ne=None):
@@ -12,14 +12,14 @@ class Element_parameters2D(object):
         :param list qe: element global displacements [q1, q2, q3, q4]
         :param list Ne: element normal force [Ne]
         """
-        self.__edof = edof
-        self.__max_edof = np.amax(edof)
-        self.__e_num = e_num
-        self.__ex = ex_global
-        self.__ey = ey_global
-        self.__EA = ep[0]*ep[1]
-        self.__qe = qe
-        self.__Ne = Ne
+        self._edof = edof
+        self._max_edof = np.amax(edof)
+        self._e_num = e_num
+        self._ex = ex_global
+        self._ey = ey_global
+        self._EA = ep[0]*ep[1]
+        self._qe = qe
+        self._Ne = Ne
 
     def length(self, ex, ey):
         """Element length"""
@@ -59,14 +59,7 @@ class Stiffness2D(Element_parameters2D):
         :param list qe: element global displacements [q1, q2, q3, q4]
         :param list Ne: element normal force [Ne]
         """
-        self.__edof = edof
-        self.__max_edof = np.amax(edof)
-        self.__e_num = e_num
-        self.__ex = ex_global
-        self.__ey = ey_global
-        self.__EA = ep[0]*ep[1]
-        self.__qe = qe
-        self.__Ne = Ne
+        Element_parameters2D.__init__(self, edof, e_num, ex_global, ey_global, ep, qe=None, Ne=None)
 
     def bar2d_ke_0(self, ex, ey, EA):
         """
@@ -159,13 +152,13 @@ class Stiffness2D(Element_parameters2D):
         Compute global stiffnes matrix for two dimensional bar elements.
         Return mat K_0: tangent matrix [4 x 4]
         """
-        Ke_0 = np.zeros((self.__e_num, 4, 4))
+        Ke_0 = np.zeros((self._e_num, 4, 4))
 
-        K_0 = np.zeros((self.__max_edof, self.__max_edof))
+        K_0 = np.zeros((self._max_edof, self._max_edof))
 
-        for i in range(0, self.__e_num):
-            Ke_0[i] = self.bar2d_ke_0(self.__ex[i], self.__ey[i], self.__EA[i])
-            K_0 = self.assem_K(self.__edof[i, :], K_0, Ke_0[i])
+        for i in range(0, self._e_num):
+            Ke_0[i] = self.bar2d_ke_0(self._ex[i], self._ey[i], self._EA[i])
+            K_0 = self.assem_K(self._edof[i, :], K_0, Ke_0[i])
 
         return K_0
 
@@ -174,23 +167,23 @@ class Stiffness2D(Element_parameters2D):
         Compute global tangent matrix for two dimensional bar elements.
         Return mat K_T: tangent matrix [4 x 4]
         """
-        Ke_0 = np.zeros((self.__e_num, 4, 4))
-        Ke_u = np.zeros((self.__e_num, 4, 4))
-        Ke_sigma = np.zeros((self.__e_num, 4, 4))
+        Ke_0 = np.zeros((self._e_num, 4, 4))
+        Ke_u = np.zeros((self._e_num, 4, 4))
+        Ke_sigma = np.zeros((self._e_num, 4, 4))
 
-        K_T = np.zeros((self.__max_edof, self.__max_edof))
+        K_T = np.zeros((self._max_edof, self._max_edof))
 
-        for i in range(0, self.__e_num):
-            Ke_0[i] = self.bar2d_ke_0(self.__ex[i], self.__ey[i], self.__EA[i])
+        for i in range(0, self._e_num):
+            Ke_0[i] = self.bar2d_ke_0(self._ex[i], self._ey[i], self._EA[i])
             Ke_u[i] = self.bar2d_ke_u(
-                self.__ex[i], self.__ey[i], self.__EA[i], self.__qe[i])
+                self._ex[i], self._ey[i], self._EA[i], self._qe[i])
             Ke_sigma[i] = self.bar2d_ke_sigma(
-                self.__ex[i], self.__ey[i], self.__Ne[i])
+                self._ex[i], self._ey[i], self._Ne[i])
 
         Ke_T = Ke_0+Ke_u+Ke_sigma
 
-        for j in range(0, self.__e_num):
-            K_T = self.assem_K(self.__edof[j, :], K_T, Ke_T[j])
+        for j in range(0, self._e_num):
+            K_T = self.assem_K(self._edof[j, :], K_T, Ke_T[j])
 
         return K_T
 
@@ -206,13 +199,7 @@ class Forces2D(Element_parameters2D):
         :param list qe: element global displacements [q1, q2, q3, q4]
         :param list Ne: element normal force [Ne]
         """
-        self.__edof = edof
-        self.__max_edof = np.amax(edof)
-        self.__e_num = e_num
-        self.__ex = ex_global
-        self.__ey = ey_global
-        self.__EA = ep[0]*ep[1]
-        self.__qe = qe
+        Element_parameters2D.__init__(self, edof, e_num, ex_global, ey_global, ep, qe)
 
     def bar2d_Ne(self, ex, ey, EA, qe):
         """
@@ -316,10 +303,10 @@ class Forces2D(Element_parameters2D):
         Compute global normal force for two dimensional bar elements.
         Return mat K_0: tangent matrix [4 x 4]
         """
-        Ne = np.zeros((self.__e_num, 1))
+        Ne = np.zeros((self._e_num, 1))
 
-        for i in range(0, self.__e_num):
-            Ne[i] = self.bar2d_Ne(self.__ex[i], self.__ey[i], self.__EA[i], self.__qe[i])
+        for i in range(0, self._e_num):
+            Ne[i] = self.bar2d_Ne(self._ex[i], self._ey[i], self._EA[i], self._qe[i])
         self.Ne = Ne
 
         return Ne
@@ -329,10 +316,10 @@ class Forces2D(Element_parameters2D):
         Compute global normal force for two dimensional bar elements.
         Return mat K_0: tangent matrix [4 x 4]
         """
-        Ne = np.zeros((self.__e_num, 1))
-
-        for i in range(0, self.__e_num):
-            Ne[i] = self.bar2d_Ne_lin(self.__ex[i], self.__ey[i], self.__EA[i], self.__qe[i])
+        Ne = np.zeros((self._e_num, 1))
+        print("debug", self._ex, self._ey, self._EA, self._qe)
+        for i in range(0, self._e_num):
+            Ne[i] = self.bar2d_Ne_lin(self._ex[i], self._ey[i], self._EA[i], self._qe[i])
         self.Ne = Ne
 
         return Ne
@@ -342,13 +329,13 @@ class Forces2D(Element_parameters2D):
         Compute global internal forces for two dimensional bar elements.
         Return mat K_0: tangent matrix [4 x 4]
         """
-        Fe = np.zeros((self.__e_num, 4, 1))
-        F = np.zeros((self.__max_edof, 1))
+        Fe = np.zeros((self._e_num, 4, 1))
+        F = np.zeros((self._max_edof, 1))
 
-        for i in range(0, self.__e_num):
+        for i in range(0, self._e_num):
             Fe[i] = self.bar2d_Fe(
-                self.__ex[i], self.__ey[i], self.__qe[i], self.Ne[i])
-            F = self.assem_F(self.__edof[i, :], F, Fe[i])
+                self._ex[i], self._ey[i], self._qe[i], self.Ne[i])
+            F = self.assem_F(self._edof[i, :], F, Fe[i])
 
         return F
 
@@ -357,7 +344,7 @@ class Forces2D(Element_parameters2D):
         return Q+R-self.compute_F()
 
 
-class Element_parameters3D(object):
+class Element_parameters3D:
     """Parent class that contains all element parameters needed to compute stiffness and forces"""
 
     def __init__(self, edof, e_num, ex_global, ey_global, ez_global, ep, qe=None, Ne=None):

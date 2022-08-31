@@ -52,7 +52,7 @@ def extractElext(edof, a):
     return ed
 
 
-class LinearSolver2D(object):
+class LinearSolver2D:
     def __init__(self, edof, max_edof, ex, ey, ep, e_num, supports, forces):
         self.q = np.asmatrix(np.zeros((max_edof, 1)))
         self.Ne = np.zeros((e_num, 1))
@@ -97,7 +97,7 @@ class LinearSolver2D(object):
         self.show_q = self.show_q.replace("'", "")
 
 
-class LinearSolver3D(object):
+class LinearSolver3D:
     def __init__(self, edof, max_edof, ex, ey, ez, ep, e_num, supports, forces):
         self.q = np.asmatrix(np.zeros((max_edof, 1)))
         Ne = np.zeros((e_num, 1))
@@ -141,7 +141,7 @@ class LinearSolver3D(object):
         self.show_q = self.show_q.replace("'", "")
 
 
-class NonlinearForceSolver2D(object):
+class NonlinearForceSolver2D:
     def __init__(self, edof, max_edof, ex, ey, ep, e_num, supports, forces, incermentsNum, maxIter, resNorm, disNorm, dofTrack):
         self.Q = np.zeros((max_edof, 1))
         deltaQ = 1/incermentsNum
@@ -253,7 +253,7 @@ class NonlinearForceSolver2D(object):
         self.show_q = self.show_q.replace("'", "")
 
 
-class NonlinearDisSolver2D(object):
+class NonlinearDisSolver2D:
     def __init__(self, edof, max_edof, ex, ey, ep, e_num, supports, forces, incermentsVal, maxIter, resNorm, disNorm, dofTrack, dofControl):
 
         m = 0
@@ -403,7 +403,7 @@ class NonlinearDisSolver2D(object):
         self.sigma = np.around(self.sigma, 5)
 
 
-class NonlinearForceSolver3D(object):
+class NonlinearForceSolver3D:
     def __init__(self, edof, max_edof, ex, ey, ez, ep, e_num, supports, forces, incermentsNum, maxIter, resNorm, disNorm, dofTrack):
         self.Q = np.zeros((max_edof, 1))
         deltaQ = 1/incermentsNum
@@ -514,5 +514,5 @@ class NonlinearForceSolver3D(object):
         self.show_q = self.show_q.replace("'", "")
 
 
-class NonlinearDisSolver3D(object):
+class NonlinearDisSolver3D:
     pass
