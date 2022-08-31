@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/vanderAries/HerMES">
-    <img src="images/hermes_full_logo.svg" alt="Hermes Logo" width="250">
+    <img src="images/hermes_full_logo_light.svg" alt="Hermes Logo" width="250">
   </a>
 
 
@@ -80,13 +80,17 @@ The project was created during my master thesis with great help of my thesis sup
 
 This project was build with [Python v. 3.10.6](https://www.python.org/downloads/release/python-3106/) and Python libraries shown below. All dependencies are in file `requirements.txt`.
 
-[<img src="https://qt-wiki-uploads.s3.amazonaws.com/images/d/db/PySideLogo2.png" alt="PySide logo" style="height: 80px;"/>][PySide-url]
+- #### QT for Pyton (PySide)
+  [<img src="https://qt-wiki-uploads.s3.amazonaws.com/images/3/33/Py-128.png" alt="PySide logo" style="height: 80px;"/>][PySide-url]
 
-[<img src="https://upload.wikimedia.org/wikipedia/commons/3/31/NumPy_logo_2020.svg" alt="NumPy logo" style="height: 80px;"/>][NumPy-url]
+- #### NumPy
+  [<img src="https://numpy.org/images/logo.svg" alt="NumPy logo" style="height: 80px;"/>][NumPy-url]
 
-[<img src="https://www.fullstackpython.com/img/logos/scipy.png" alt="SciPy logo" style="height: 60px;"/>][SciPy-url]
+- #### SciPy
+  [<img src="https://scipy.org/images/logo.svg" style="height: 60px;"/>][SciPy-url]
 
-[<img src="https://matplotlib.org/stable/_static/logo2.svg" alt="Matplotlib logo" style="height: 50px;"/>][Matplotlib-url]
+- #### Matplotlib
+  [<img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Matplotlib_icon.svg" style="height: 50px;"/>][Matplotlib-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -225,8 +229,8 @@ This section will be developed and updated in the future. For now, try it yourse
 
 - [x] Import
 - [x] Export
-- [ ] Preprocessor
-- [ ] Posprocessor
+- [ ] Pre-processor
+- [ ] Post-processor
 - [ ] Units converter
 
 See the [open issues](https://github.com/vanderAries/HerMES/issues) for a full list of proposed features (and known issues).
