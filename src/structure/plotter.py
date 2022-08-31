@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d
 
-class TrussPlot2D(object):
+class TrussPlot2D:
     def __init__(self, coords, elems, n_num, e_num, start_points, end_points, bars_center, axis):
         self.nodes_x = coords[0:n_num, 0]
         self.nodes_y = coords[0:n_num, 1]
@@ -54,7 +54,7 @@ class TrussPlot2D(object):
     #         plt.plot(sup_x, sup_y, color='green', marker=6, markersize=11)
 
 
-class TrussPlot3D(object):
+class TrussPlot3D:
     def __init__(self, coords, elems, n_num, e_num, start_points, end_points, bars_center, axis):
         self.nodes_x = coords[0:n_num, 0]
         self.nodes_y = coords[0:n_num, 1]

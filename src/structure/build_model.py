@@ -2,7 +2,7 @@ import numpy as np
 from structure.plotter import TrussPlot2D, TrussPlot3D
 
 
-class Truss2D(object):
+class Truss2D:
     def __init__(self, data):
         self._E = data.E
         self._A = data.A
@@ -244,7 +244,7 @@ class Truss2D(object):
                     self.end_points, self.bars_center, self.axis)
 
 
-class Truss3D(object):
+class Truss3D:
     def __init__(self, data):
         self._E = data.E
         self._A = data.A
